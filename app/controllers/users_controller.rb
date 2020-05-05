@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       # Success (valid params)
+      log_in @user
       flash[:success] = "Welcome to the Sample App!"
       
       # GET "/user/#{@user.id}"
