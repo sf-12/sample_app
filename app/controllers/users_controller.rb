@@ -23,14 +23,9 @@ class UsersController < ApplicationController
     # User.create(params[:user])
     @user = User.new(user_params)
     if @user.save
-      # Success (valid params)
-      log_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      
-      # GET "/user/#{@user.id}"
-      redirect_to @user
-      
-      
+      @user.send_activation_email
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       # Failue (boy valid params)
       render 'new'
